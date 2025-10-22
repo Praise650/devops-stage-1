@@ -1,8 +1,4 @@
-# devops-stage-1
-
-# devops-stage-1
-
-# HNG DevOps Intern Stage 1: Automated Docker Deployment Script
+# Stage 1: Automated Docker Deployment Script
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![POSIX Compliant](https://img.shields.io/badge/POSIX-Compliant-blue.svg)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html)
