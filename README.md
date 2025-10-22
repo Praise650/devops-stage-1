@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![POSIX Compliant](https://img.shields.io/badge/POSIX-Compliant-blue.svg)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html)
 
-A production-grade, idempotent Bash script (`deploy.sh`) that automates the setup, deployment, and proxying of a Dockerized app to a remote Linux server (e.g., AWS EC2 Ubuntu). Handles Git clone/pull, SSH connectivity, Docker/Nginx installs, file transfer, container build/run, reverse proxy config, and health checks—with logging, error traps, and cleanup.
+A production-grade, idempotent Bash script (`deploy.sh`) that automates the setup, deployment, and proxying of a Dockerized app to a remote Linux server (e.g., AWS EC2 Ubuntu). Handles Git clone/pull, SSH connectivity, Docker/Nginx installs, file transfer, container build/run, reverse proxy config, and health checks—with logging, error traps.
 
 Inspired by real CI/CD workflows: Safe re-runs, no duplicates, stage-specific exit codes (0=success, 1=error).
 
@@ -20,7 +20,7 @@ Inspired by real CI/CD workflows: Safe re-runs, no duplicates, stage-specific ex
 ## Prerequisites
 - **Local**: Bash 4+ (POSIX), Git, SSH client, rsync, Docker (for local tests).
 - **Remote Server**: Linux (Ubuntu/Debian tested), SSHD on port 22, sudo access for ubuntu/ec2-user.
-- **AWS EC2 Example**: t2.micro Ubuntu 24.04, Security Group open: 22 (SSH from your IP), 80 (HTTP Anywhere), 3000 (App from your IP), ICMP (Ping from your IP).
+- **AWS EC2 Example**: t3.micro Ubuntu 24.04, Security Group open: 22 (SSH from your IP), 80 (HTTP Anywhere), 3000 (App from your IP), ICMP (Ping from your IP).
 - **GitHub**: Repo with Dockerfile (or docker-compose.yml); PAT for private (repo:contents read).
 - **SSH Key**: PEM/RSA key (chmod 400); pubkey in remote `~/.ssh/authorized_keys`.
 
@@ -54,11 +54,7 @@ Git Repository URL: https://github.com/Praise650/devops-stage-1.git
 [2025-10-22 05:XX:XX] === EOF Deployment ===
 
 - **Output**: Logs to `deploy_YYYYMMDD.log` (tee'd to console). Tail: `tail -f deploy_*.log`.
-- **Success**: App at `http://<SERVER_IP>:80` (proxied) or `:3000` (direct). Curl: "Hello from Dockerized DevOps Intern App!"
-
-### Cleanup
-Tear down: `./deploy.sh --cleanup`
-- Stops/rm container, deletes `/opt/app`, reverts Nginx config.
+- **Success**: App at `http://<SERVER_IP>:80` (proxied) or `:3000` (direct). Curl: "HNG Stage One Automate Docker Deployment"
 
 ## Testing
 ### Local (Steps 1-3)
@@ -67,7 +63,7 @@ Tear down: `./deploy.sh --cleanup`
 - Local App Test: `docker build -t sample . && docker run -p 3000:3000 sample` → `curl localhost:3000`.
 
 ### Full End-to-End
-- AWS EC2: Launch Ubuntu t2.micro (see Prereqs), run script.
+- AWS EC2: Launch Ubuntu t3.micro (see Prereqs), run script.
 - Verify: `curl http://<IP>` ("Hello..."), `ssh user@IP "docker ps"` (app-container UP).
 - Idempotency: Re-run → Pulls updates, restarts container, no dups.
 - Edge: Bad URL → Exit 1, log "Invalid Git URL...".
