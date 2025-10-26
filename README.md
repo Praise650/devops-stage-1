@@ -44,6 +44,7 @@ Run interactively: `./deploy.sh`
 | App Port | App Port (internal) | Numeric (1-65535) | `3000` |
 
 ### Sample Run
+```bash
 $ ./deploy.sh
 [2025-10-22 05:XX:XX] === Starting Deployment ===
 Git Repository URL: https://github.com/Praise650/devops-stage-1.git
@@ -52,7 +53,7 @@ Git Repository URL: https://github.com/Praise650/devops-stage-1.git
 ... (clone, SSH, prep, deploy, proxy, validate)
 [2025-10-22 05:XX:XX] Validation: Stack solid. Full deploy success!
 [2025-10-22 05:XX:XX] === EOF Deployment ===
-
+```
 - **Output**: Logs to `deploy_YYYYMMDD.log` (tee'd to console). Tail: `tail -f deploy_*.log`.
 - **Success**: App at `http://<SERVER_IP>:80` (proxied) or `:3000` (direct). Curl: "HNG Stage One Automate Docker Deployment"
 
@@ -87,4 +88,4 @@ Tested on: Ubuntu 24.04 (local/remote), Node.js sample app (port 3000).
 ## License
 MIT—fork, star, contribute! 🚀
 
-Built for HNG DevOps Intern Stage 1. Questions? @editortechbbro on Slack.
+Built for HNG DevOps Intern Stage 1. Questions? @editortechbro on Slack.
